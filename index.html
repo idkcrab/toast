@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discord Webhook Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #5865F2;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            button:hover {
+                background: #4752c4;
+            }
+
+        .output {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .embed {
+            border-left: 4px solid #7289DA;
+            background: #f9f9f9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .author {
+            font-weight: bold;
+            color: #2c2f33;
+        }
+
+        .content {
+            margin-top: 5px;
+            color: #23272A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Discord Webhook Simulator</h2>
+        <p style="color: red; font-weight: bold;">⚠️ This is a simulation. It shows what would be sent to the webhook. Nothing is actually sent.</p>
+        <input type="text" id="urlInput" placeholder="Enter a website link">
+        <button onclick="simulateSend()">Send to Webhook</button>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        function simulateSend() {
+            const url = document.getElementById("urlInput").value.trim();
+            if (!url) {
+                document.getElementById("output").textContent = "Please enter a URL.";
+                return;
+            }
+
+            const proceed = confirm(
+                "This will simulate sending your link to the webhook:\n" +
+                "https://discord.com/api/webhooks/1415017707216175225/bVPsqFxjkgFtCbLqB5NIWQozW6qDtkeAIx_ERTh-8dlpkzpew4ew9y2uD27V9f6t8yij\n\n" +
+                "Do you want to proceed?"
+            );
+
+            const outputDiv = document.getElementById("output");
+            if (proceed) {
+                outputDiv.innerHTML = `
+              ✅ Simulated sending to webhook:
+              <div class="embed">
+                <div class="author">Webhook: <span style="color:#5865F2;">https://discord.com/api/webhooks/1415017707216175225/bVPsqFxjkgFtCbLqB5NIWQozW6qDtkeAIx_ERTh-8dlpkzpew4ew9y2uD27V9f6t8yij</span></div>
+                <div class="content">Message: ${url}</div>
+              </div>
+            `;
+            } else {
+                outputDiv.textContent = "❌ Cancelled by user.";
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discord Webhook Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #5865F2;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            button:hover {
+                background: #4752c4;
+            }
+
+        .output {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .embed {
+            border-left: 4px solid #7289DA;
+            background: #f9f9f9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .author {
+            font-weight: bold;
+            color: #2c2f33;
+        }
+
+        .content {
+            margin-top: 5px;
+            color: #23272A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Discord Webhook Simulator</h2>
+        <p style="color: red; font-weight: bold;">⚠️ This is a simulation. It shows what would be sent to the webhook. Nothing is actually sent.</p>
+        <input type="text" id="urlInput" placeholder="Enter a website link">
+        <button onclick="simulateSend()">Send to Webhook</button>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        function simulateSend() {
+            const url = document.getElementById("urlInput").value.trim();
+            if (!url) {
+                document.getElementById("output").textContent = "Please enter a URL.";
+                return;
+            }
+
+            const proceed = confirm(
+                "This will simulate sending your link to the webhook:\n" +
+                "https://discord.com/api/webhooks/1415806983365459988/UspwewgMe78qKoG58BBmpXh91ufMXt_TZcPSLvv53l5i4Nm9H67LLvRxbGhb0_B-dVAX\n\n" +
+                "Do you want to proceed?"
+            );
+
+            const outputDiv = document.getElementById("output");
+            if (proceed) {
+                outputDiv.innerHTML = `
+          ✅ Simulated sending to webhook:
+          <div class="embed">
+            <div class="author">Webhook: <span style="color:#5865F2;">https://discord.com/api/webhooks/1415806983365459988/UspwewgMe78qKoG58BBmpXh91ufMXt_TZcPSLvv53l5i4Nm9H67LLvRxbGhb0_B-dVAX</span></div>
+            <div class="content">Message: ${url}</div>
+          </div>
+        `;
+            } else {
+                outputDiv.textContent = "❌ Cancelled by user.";
+            }
+        }
+    </script>
+</body>
+</html>
