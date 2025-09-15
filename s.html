@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>live sub count by toasstdev</title>
+    <title>Lilive sub count by toasstdev</title>
     <style>
         body {
             margin: 0;
@@ -57,6 +57,7 @@
                 const data = await response.json();
                 const subs = data.items[0].statistics.subscriberCount;
 
+                // Animate digits
                 updateDigits(subs);
             } catch (error) {
                 console.error("Error fetching subscriber count:", error);
@@ -79,6 +80,7 @@
             }
         }
 
+        // Fetch every 2 seconds for live update
         fetchSubscriberCount();
         setInterval(fetchSubscriberCount, 2000);
     </script>
