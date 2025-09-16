@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folder Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+    }
+    ul { list-style: none; padding: 0; }
+    li { margin: 6px 0; }
+    a { color: #4da3ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Files in This Folder</h1>
+  <ul id="file-list"></ul>
+
+  <script>
+    async function loadFiles() {
+      // fetch the current folder
+      const res = await fetch(".");
+      const text = await res.text();
+
+      // create a temporary DOM parser
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+
+      // get all links from the directory listing
+      const links = [...doc.querySelectorAll("a")];
+      const list = document.getElementById("file-list");
+
+      links.forEach(link => {
+        const name = link.getAttribute("href");
+        if (!name || name.startsWith("?") || name.startsWith("#") || name === "../") return;
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = name;
+        a.textContent = name;
+        a.target = "_blank";
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    }
+
+    loadFiles();
+  </script>
+</body>
+</html>
