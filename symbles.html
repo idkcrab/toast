@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>2,000 Rare Symbols Palette</title>
+<style>
+  body {
+    margin:0; font-family:sans-serif;
+    background:#0d1117; color:#e6eef8;
+    display:flex; flex-direction:column; padding:20px;
+  }
+  h1{margin:0 0 10px;}
+  input {
+    padding:8px; border-radius:8px; border:1px solid #333; 
+    background:#161b22; color:white; width:260px;
+  }
+  .grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(60px,1fr));
+    gap:8px; margin-top:12px;
+  }
+  .tile {
+    background:#161b22; border:1px solid #30363d;
+    border-radius:8px; text-align:center; padding:10px;
+    cursor:pointer; transition:transform .1s;
+  }
+  .tile:hover { transform:scale(1.1); background:#1f2937; }
+  .symbol { font-size:24px; margin-bottom:4px; }
+  .meta { font-size:10px; color:#9ca3af; }
+  .toast {
+    position:fixed; bottom:20px; right:20px;
+    background:#1f2937; padding:8px 12px;
+    border-radius:8px; display:none;
+  }
+</style>
+</head>
+<body>
+<h1>2,000 Rare Symbols</h1>
+<p>Click any symbol to copy. Search by glyph or codepoint.</p>
+<input id="search" type="search" placeholder="Search..." />
+<div id="grid" class="grid"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const ranges = [
+  [0x2200, 0x22FF], 
+  [0x2300, 0x23FF], 
+  [0x25A0, 0x25FF], 
+  [0x2600, 0x26FF],
+  [0x2700, 0x27BF],
+  [0x1F300, 0x1F5FF], 
+  [0x1F600, 0x1F64F], 
+  [0x1F680, 0x1F6FF],
+  [0x1F900, 0x1F9FF],
+  [0x1FA70, 0x1FAFF], 
+];
+
+let SYMBOLS = [];
+for (let [start,end] of ranges) {
+  for (let cp=start; cp<=end; cp++) {
+    try {
+      SYMBOLS.push(String.fromCodePoint(cp));
+    } catch {}
+  }
+}
+SYMBOLS = SYMBOLS.slice(0, 2000);
+
+const grid=document.getElementById("grid");
+const search=document.getElementById("search");
+const toast=document.getElementById("toast");
+
+function codeInfo(ch){
+  let cp = ch.codePointAt(0);
+  return "U+"+cp.toString(16).toUpperCase();
+}
+function showToast(msg){
+  toast.textContent=msg;
+  toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",1200);
+}
+function copyText(txt){
+  navigator.clipboard.writeText(txt).then(()=>{},()=>{});
+}
+function makeTile(sym){
+  let t=document.createElement("div");
+  t.className="tile";
+  let s=document.createElement("div");
+  s.className="symbol";
+  s.textContent=sym;
+  let m=document.createElement("div");
+  m.className="meta";
+  m.textContent=codeInfo(sym);
+  t.appendChild(s); t.appendChild(m);
+  t.onclick=()=>{
+    copyText(sym);
+    showToast(sym+" copied!");
+  };
+  return t;
+}
+function render(list){
+  grid.innerHTML="";
+  list.forEach(ch=>grid.appendChild(makeTile(ch)));
+}
+render(SYMBOLS);
+
+search.addEventListener("input", e=>{
+  let q=e.target.value.toLowerCase();
+  let filtered=SYMBOLS.filter(ch=>{
+    let cp=ch.codePointAt(0);
+    return ch.includes(q) || cp.toString().includes(q) || cp.toString(16).includes(q);
+  });
+  render(filtered);
+});
+</script>
+</body>
+</html>
